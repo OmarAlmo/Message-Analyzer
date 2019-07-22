@@ -17,31 +17,37 @@ class LinkedList:
 
     def searchUser(self, user):
 
-        current_node = self.head
+        currentUser = self.head
 
-        while current_node is not None:
-            if current_node.hasUser(user):
+        while currentUser != None:
+            if currentUser.hasUser(user):
                 return True
             else:
-                current_node = current_node.next
+                currentUser = currentUser.next
 
         return False
 
-    def updateUserCount(self, user):
-        current_node = self.head
-
-        while current_node is not None:
-            if current_node.hasUser(user):
-                current_node.count += 1
+    def incrementUserCount(self, user):
+        currentUser = self.head
+        while currentUser != None:
+            if currentUser.hasUser(user):
+                currentUser.count += 1
                 break
             else:
-                current_node = current_node.next
+                currentUser = currentUser.next
+
+    def getTotalCount(self):
+        currentUser = self.head
+        totalCount = 0
+        while currentUser != None:
+            totalCount += currentUser.count
+            currentUser = currentUser.next
+        return totalCount
 
     def printList(self):
-        current_node = self.head
+        current = self.head
+        total = self.getTotalCount()
+        while current != None:
+            print("{}: count = {}; percent => {}%.".format(current.user, current.count, round(current.count/total * 100, 2)))
 
-        while current_node is not None:
-            print(current_node.user + ' => count: ' + str(current_node.count))
-            current_node = current_node.next
-
-        return
+            current = current.next
